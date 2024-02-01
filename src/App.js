@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const questions = [
   {
     id: 3457,
@@ -39,21 +41,39 @@ export default function App() {
     </div>
   );
 }
-
+/**
+ * Component uses State to keep track of selected cards by id. Iterates through question list to display on individual cards.
+ * When card is clicked the handleClick function is triggered and flips card to display answer, if clicked again, it displays the corresponding question again.
+ * @returns card/question information list on individual cards.
+ */
 function FlashCards() {
+  const [selectedId, setSelectedId] = useState(null);
+  // function that takes id when clicked and check if id is not the same to pass null(flip card)
+  function handleClick(id) {
+    setSelectedId(id !== selectedId ? id : null);
+  }
+
   return (
     <div className="flashcards">
-      {questions.map((card) => (
-        <Card card={card} key={card.id} />
+      {questions.map((question) => (
+        <div
+          key={question.id}
+          onClick={() => handleClick(question.id)}
+          className={question.id === selectedId ? "selected" : ""}
+        >
+          <p>
+            {question.id === selectedId ? question.answer : question.question}
+          </p>
+        </div>
       ))}
     </div>
   );
 }
 
-function Card({ card }) {
-  return (
-    <div>
-      <div>{card.question}</div>
-    </div>
-  );
-}
+// function Card({ question }) {
+//   return (
+//     <div>
+//       <div>{question.question}</div>
+//     </div>
+//   );
+// }

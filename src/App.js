@@ -69,11 +69,3 @@ function FlashCards() {
     </div>
   );
 }
-
-// function Card({ question }) {
-//   return (
-//     <div>
-//       <div>{question.question}</div>
-//     </div>
-//   );
-// }
